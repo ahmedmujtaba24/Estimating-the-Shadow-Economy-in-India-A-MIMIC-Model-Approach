@@ -1,1 +1,42 @@
 # Its not possible to find certain data and a lot of data is often missing, to be able to have an accurate mimic model its recommended to have full data. though Its not necessary, It is recommended.
+_______________________________________________________________________________________________________________________________________________________________________________________________________
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from statsmodels.tsa.arima.model import ARIMA
+
+data = {
+    "Year": [2011, 2014, 2016, 2018, 2020],
+    "EoDB_Score": [48.5, 52.5, 56.0, 65.0, 71.0]
+}
+
+df = pd.DataFrame(data)
+df.set_index("Year", inplace=True)
+
+# Linear interpolation to estimate missing years between 2011 and 2020
+df_full_linear = df.reindex(range(2011, 2021))
+df_full_linear["EoDB_Score"] = df_full_linear["EoDB_Score"].interpolate(method='linear')
+
+# ARIMA model to forecast from 2021 to 2024
+model = ARIMA(df_full_linear["EoDB_Score"], order=(1, 1, 1))
+model_fit = model.fit()
+forecast = model_fit.forecast(steps=4)
+
+forecast_years = list(range(2021, 2025))
+forecast_df = pd.DataFrame({"EoDB_Score": forecast}, index=forecast_years)
+combined_df = pd.concat([df_full_linear, forecast_df])
+
+combined_df_rounded = combined_df.round(2)
+combined_df_rounded.reset_index(inplace=True)
+combined_df_rounded.rename(columns={'index': 'Year'}, inplace=True)
+
+plt.figure(figsize=(10, 6))
+plt.plot(combined_df_rounded["Year"], combined_df_rounded["EoDB_Score"], marker='o', linestyle='-')
+plt.title("Ease of Doing Business Score (Projected: 2011–2024)")
+plt.xlabel("Year")
+plt.ylabel("EoDB Score")
+plt.grid(True)
+plt.tight_layout()
+
+combined_df_rounded, plt.show()
+_______________________________________________________________________________________________________________________________________________________________________________________________________
