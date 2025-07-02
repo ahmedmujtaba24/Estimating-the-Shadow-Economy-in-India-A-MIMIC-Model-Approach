@@ -40,3 +40,37 @@ plt.tight_layout()
 
 combined_df_rounded, plt.show()
 _______________________________________________________________________________________________________________________________________________________________________________________________________
+
+import numpy as np
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+
+# Given data (2016-2025)
+data = {
+    'Year': [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+    'M2_Supply': [23000, 25500, 27800, 30500, 34000, 39000, 44000, 49500, 54000, 59500]
+}
+
+# Convert to DataFrame
+df = pd.DataFrame(data)
+
+# We'll use 2016-2020 for training (most stable pre-pandemic trend)
+train_years = np.array([2016, 2017, 2018, 2019, 2020]).reshape(-1, 1)
+train_m2 = np.array([23000, 25500, 27800, 30500, 34000])
+
+# Train linear regression model
+model = LinearRegression()
+model.fit(train_years, train_m2)
+
+# Predict for 2011-2015
+predict_years = np.array([2011, 2012, 2013, 2014, 2015]).reshape(-1, 1)
+predicted_m2 = model.predict(predict_years)
+
+# Create results DataFrame
+results = pd.DataFrame({
+    'Year': predict_years.flatten(),
+    'Estimated_M2_Supply_INR_Billion': predicted_m2.round().astype(int)
+})
+
+print(results)
+_______________________________________________________________________________________________________________________________________________________________________________________________________
