@@ -1,0 +1,42 @@
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+
+years = list(range(2011, 2025))
+
+# Indicators (endogenous variables)
+indicators = pd.DataFrame({
+    "Year": years,
+    "M2_Supply": [12471, 14914, 17357, 19800, 22243, 23000, 25500, 27800, 30500, 34000, 39000, 44000, 49500, 54000],
+    "LFPR": [0.3076, 0.3014, 0.2946, 0.2894, 0.2855, 0.293, 0.3009, 0.3085, 0.3157, 0.3226, 0.3293, 0.3349, 0.3395, 0.3521],
+    "NTL": [8.26, 8.74, 9.22, 9.69, 10.17, 10.65, 11.12, 11.6, 12.08, 12.56, 13.03, 13.51, 13.99, 14.47],
+    "Tax_Revenue": [888353, 961313, 1115888, 1242463, 1437061, 1713262, 1976609, 2153809, 2030699, 2016251, 2713422, 2965673, 3442000, 3785000]
+})
+
+# Causes (exogenous variables)
+causes = pd.DataFrame({
+    "Year": years,
+    "Unemployment": [0.0762, 0.0767, 0.0771, 0.0767, 0.0763, 0.076, 0.0762, 0.0765, 0.0651, 0.0786, 0.0638, 0.0482, 0.0417, 0.042],
+    "GDP_per_capita": [1445.46, 1429.32, 1432.84, 1553.88, 1584.0, 1707.51, 1950.10, 1966.25, 2041.43, 1907.04, 2239.61, 2352.61, None, None],
+    "EoDB_Score": [48.5, 49.83, 51.17, 52.5, 54.25, 56, 60.5, 65, 68, 71, 73.71, 76.13, 78.3, 80.23],
+    "Inflation": [8.91, 9.48, 10.02, 6.67, 4.91, 4.95, 3.33, 3.94, 3.73, 6.62, 5.13, 6.7, 5.65, 4.95]
+})
+
+data = pd.merge(indicators, causes, on="Year").dropna()
+
+normalized = data.copy()
+columns_to_normalize = ["M2_Supply", "LFPR", "NTL", "Tax_Revenue", "Unemployment", "GDP_per_capita", "EoDB_Score", "Inflation"]
+for col in columns_to_normalize:
+    normalized[col] = (normalized[col] - normalized[col].mean()) / normalized[col].std()
+
+normalized["latent_proxy"] = normalized[["Unemployment", "GDP_per_capita", "EoDB_Score", "Inflation"]].mean(axis=1)
+
+results = {}
+for ind in ["M2_Supply", "LFPR", "NTL", "Tax_Revenue"]:
+    model = sm.OLS(normalized[ind], sm.add_constant(normalized["latent_proxy"]))
+    results[ind] = model.fit()
+
+results_summary = {key: model.summary().as_text() for key, model in results.items()}
+results_summary["latent_estimates"] = normalized[["Year", "latent_proxy"]]
+
+results_summary
