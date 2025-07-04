@@ -73,3 +73,30 @@ results = pd.DataFrame({
 
 print(results)
 _______________________________________________________________________________________________________________________________________________________________________________________________________
+#Night-Time_Light_usage_data
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+
+years_known = np.array([2011, 2015, 2019, 2023]).reshape(-1, 1)
+ntl_values_known = np.array([8.2, 10.1, 12.4, 13.8])
+
+model = LinearRegression()
+model.fit(years_known, ntl_values_known)
+
+years_full = np.arange(2011, 2025).reshape(-1, 1)
+ntl_values_pred = model.predict(years_full)
+
+plt.figure(figsize=(10, 6))
+plt.plot(years_full, ntl_values_pred, label='Projected NTL Intensity (2011–2024)', marker='o')
+plt.scatter(years_known, ntl_values_known, color='red', label='Actual Data Points')
+plt.title("Projected Nighttime Light Intensity in India (2011–2024)")
+plt.xlabel("Year")
+plt.ylabel("Mean NTL Intensity (Digital Number)")
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+_______________________________________________________________________________________________________________________________________________________________________________________________________
+
