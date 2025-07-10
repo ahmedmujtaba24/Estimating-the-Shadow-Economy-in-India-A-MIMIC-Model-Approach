@@ -2,13 +2,10 @@ import matplotlib.pyplot as plt
 import networkx as nx
 from matplotlib.patches import Ellipse
 
-# Define the model structure
 G = nx.DiGraph()
 
-# Latent variable
 G.add_node("Shadow Economy", node_type="latent")
 
-# Causes of the shadow economy (exogenous variables)
 causes = [
     "Unemployment Rate",
     "GDP per Capita",
@@ -20,7 +17,6 @@ causes = [
     "Labor Force Participation Rate"
 ]
 
-# Indicators of the shadow economy (endogenous variables)
 indicators = [
     "Nighttime Light Intensity",
     "M2 Money Supply",
@@ -28,7 +24,6 @@ indicators = [
     "Electricity Consumption Deviation"
 ]
 
-# Add nodes and edges
 for cause in causes:
     G.add_node(cause, node_type="cause")
     G.add_edge(cause, "Shadow Economy")
@@ -37,18 +32,14 @@ for indicator in indicators:
     G.add_node(indicator, node_type="indicator")
     G.add_edge("Shadow Economy", indicator)
 
-# Custom drawing
 plt.figure(figsize=(18, 12))
 pos = {}
 
-# Position latent variable at center
 pos["Shadow Economy"] = (0, 0)
 
-# Position causes to the left (aligned vertically)
 for i, cause in enumerate(causes):
     pos[cause] = (-3, 2 - i * 0.5)
 
-# Position indicators to the right (aligned vertically)
 for i, indicator in enumerate(indicators):
     pos[indicator] = (3, 2 - i * 0.5)
 
@@ -66,12 +57,10 @@ for node in G.nodes():
         node_colors.append("lightgreen")
         node_shapes.append("d")  # diamond for indicators
 
-# Draw the graph
 nx.draw_networkx_nodes(G, pos, node_color=node_colors, node_size=2500)
 nx.draw_networkx_edges(G, pos, arrowstyle='->', arrowsize=20, width=1.5)
 nx.draw_networkx_labels(G, pos, font_size=10, font_weight='bold')
 
-# Create legend
 legend_elements = [
     plt.Line2D([0], [0], marker='s', color='w', label='Latent Variable',
               markerfacecolor='orange', markersize=15),
