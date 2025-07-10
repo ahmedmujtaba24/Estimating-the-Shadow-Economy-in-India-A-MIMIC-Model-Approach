@@ -1,0 +1,54 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+
+latent_variable = "Shadow Economy"
+
+causes = [
+    "Unemployment Rate",
+    "GDP per Capita",
+    "Ease of Doing Business",
+    "Tax-to-GDP Ratio",
+    "Corruption Perception Index (CPI)",
+    "M2 Money Supply",
+    "Labor Force Participation Rate (LFPR)",
+]
+
+indicators = [
+    "Inflation Rate",
+    "Urban Population %",
+    "Female Bank Accounts %",
+    "Gender Gap in Bank Accounts",
+    "Crime Rate",
+    "Nighttime Light Intensity",
+    "Total Tax Revenue",
+]
+
+fig, ax = plt.subplots(figsize=(14, 10))
+ax.axis('off')
+
+
+x_latent, y_latent = 0.5, 0.5
+
+ax.text(x_latent, y_latent, latent_variable, ha='center', va='center',
+        fontsize=14, bbox=dict(facecolor='lightblue', edgecolor='black', boxstyle='round,pad=1'))
+
+for i, cause in enumerate(causes):
+    y = 0.9 - i * 0.1
+    ax.text(0.15, y, cause, ha='center', va='center', fontsize=10,
+            bbox=dict(facecolor='lightgreen', edgecolor='black', boxstyle='round,pad=0.5'))
+    ax.annotate('', xy=(0.35, y), xytext=(0.25, y),
+                arrowprops=dict(arrowstyle='->', lw=1.5))
+    ax.annotate('', xy=(0.45, y_latent), xytext=(0.35, y),
+                arrowprops=dict(arrowstyle='->', lw=1.5))
+
+for i, indicator in enumerate(indicators):
+    y = 0.9 - i * 0.1
+    ax.text(0.85, y, indicator, ha='center', va='center', fontsize=10,
+            bbox=dict(facecolor='salmon', edgecolor='black', boxstyle='round,pad=0.5'))
+    ax.annotate('', xy=(0.55, y_latent), xytext=(0.65, y),
+                arrowprops=dict(arrowstyle='->', lw=1.5))
+
+plt.title("MIMIC Model of the Shadow Economy in India (Conceptual Diagram)", fontsize=16)
+plt.tight_layout()
+plt.show()
