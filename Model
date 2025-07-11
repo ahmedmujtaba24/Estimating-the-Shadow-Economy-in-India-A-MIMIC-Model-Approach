@@ -3,8 +3,6 @@ import numpy as np
 import statsmodels.api as sm
 
 years = list(range(2011, 2025))
-
-# Indicators (endogenous variables)
 indicators = pd.DataFrame({
     "Year": years,
     "M2_Supply": [12471, 14914, 17357, 19800, 22243, 23000, 25500, 27800, 30500, 34000, 39000, 44000, 49500, 54000],
@@ -13,7 +11,6 @@ indicators = pd.DataFrame({
     "Tax_Revenue": [888353, 961313, 1115888, 1242463, 1437061, 1713262, 1976609, 2153809, 2030699, 2016251, 2713422, 2965673, 3442000, 3785000]
 })
 
-# Causes (exogenous variables)
 causes = pd.DataFrame({
     "Year": years,
     "Unemployment": [0.0762, 0.0767, 0.0771, 0.0767, 0.0763, 0.076, 0.0762, 0.0765, 0.0651, 0.0786, 0.0638, 0.0482, 0.0417, 0.042],
@@ -25,18 +22,18 @@ causes = pd.DataFrame({
 data = pd.merge(indicators, causes, on="Year").dropna()
 
 normalized = data.copy()
-columns_to_normalize = ["M2_Supply", "LFPR", "NTL", "Tax_Revenue", "Unemployment", "GDP_per_capita", "EoDB_Score", "Inflation"]
-for col in columns_to_normalize:
+cols_to_norm = ["M2_Supply", "LFPR", "NTL", "Tax_Revenue", "Unemployment", "GDP_per_capita", "EoDB_Score", "Inflation"]
+for col in cols_to_norm:
     normalized[col] = (normalized[col] - normalized[col].mean()) / normalized[col].std()
 
 normalized["latent_proxy"] = normalized[["Unemployment", "GDP_per_capita", "EoDB_Score", "Inflation"]].mean(axis=1)
 
 results = {}
-for ind in ["M2_Supply", "LFPR", "NTL", "Tax_Revenue"]:
-    model = sm.OLS(normalized[ind], sm.add_constant(normalized["latent_proxy"]))
-    results[ind] = model.fit()
+for indicator in ["M2_Supply", "LFPR", "NTL", "Tax_Revenue"]:
+    model = sm.OLS(normalized[indicator], sm.add_constant(normalized["latent_proxy"]))
+    results[indicator] = model.fit()
 
-results_summary = {key: model.summary().as_text() for key, model in results.items()}
+results_summary = {k: v.summary().as_text() for k, v in results.items()}
 results_summary["latent_estimates"] = normalized[["Year", "latent_proxy"]]
 
 results_summary
