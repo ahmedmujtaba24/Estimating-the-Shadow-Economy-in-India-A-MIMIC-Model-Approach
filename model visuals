@@ -77,3 +77,29 @@ plt.ylim(-2, 3)
 plt.axis('off')
 plt.tight_layout()
 plt.show()
+
+________________________________________________________________________
+
+import matplotlib.pyplot as plt
+import pandas as pd
+
+data = {
+    "Year": list(range(2011, 2023)),
+    "Shadow_Economy_Percent": [
+        18.7, 19.9, 20.9, 18.2, 16.1, 18.2, 19.6, 21.3, 19.5, 25.8, 22.4, 20.9
+    ]
+}
+
+df = pd.DataFrame(data)
+
+plt.figure(figsize=(10, 6))
+plt.plot(df["Year"], df["Shadow_Economy_Percent"], marker='o', linestyle='-', color='darkblue')
+plt.title("Estimated Shadow Economy in India (2011–2022)", fontsize=14)
+plt.xlabel("Year", fontsize=12)
+plt.ylabel("Shadow Economy (% of GDP)", fontsize=12)
+plt.grid(True)
+plt.xticks(df["Year"])
+plt.tight_layout()
+plt.show()
+
+________________________________________________________________________
