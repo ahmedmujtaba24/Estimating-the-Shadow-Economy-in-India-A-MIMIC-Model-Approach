@@ -37,3 +37,31 @@ results_summary = {k: v.summary().as_text() for k, v in results.items()}
 results_summary["latent_estimates"] = normalized[["Year", "latent_proxy"]]
 
 results_summary
+_______________________________________________________________________________________________________________________________________________________
+
+import pandas as pd
+import numpy as np
+
+latent_results = pd.DataFrame({
+    'Year': range(2011, 2023),
+    'latent_proxy': [-0.175, -0.078, 0.029, -0.221, -0.358, -0.221, 
+                    -0.090, 0.111, -0.095, 0.570, 0.321, 0.208]
+})
+
+
+benchmark_year = 2020  # COVID peak year
+benchmark_value = 25.8  # IMF estimate for India's shadow economy in 2020 (%)
+
+mean_proxy = latent_results['latent_proxy'].mean()
+range_proxy = latent_results['latent_proxy'].max() - latent_results['latent_proxy'].min()
+
+latent_results['Shadow_Economy_%GDP'] = (
+    15 +  # Base level
+    ((latent_results['latent_proxy'] - latent_results['latent_proxy'].min()) / 
+     range_proxy) * 15  # Scale to 15-30% range
+)
+
+adjustment = benchmark_value - latent_results.loc[latent_results['Year'] == benchmark_year, 'Shadow_Economy_%GDP'].values[0]
+latent_results['Shadow_Economy_%GDP'] += adjustment
+
+latent_results['Shadow_Economy_%GDP'] = latent_results['Shadow_Economy_%GDP'].round(1)
