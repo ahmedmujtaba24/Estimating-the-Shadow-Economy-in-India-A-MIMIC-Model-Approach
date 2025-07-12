@@ -66,9 +66,9 @@ shadow-economy-india/
 ## 👤 Author
 **Ahmed [Your Name]**  
 B. Borooah College – Economics Hons. (Quantitative Stream)  
-Working on research in shadow economy, financial inclusion, and causal modeling.  
+Working on research in shadow economy, financial inclusion, and causal modeling.
 
-📫 *Let's connect:* [LinkedIn]([https://www.linkedin.com/in/mujtabaahmed24/]) • [GitHub]([https://github.com/](https://github.com/ahmedmujtaba24])) • [Email]([ahmedmujtabamp4@gmail.com])
+📫 *Let's connect:* [LinkedIn](https://www.linkedin.com/in/mujtabaahmed24/) • [GitHub](https://github.com/ahmedmujtaba24) • [Email](mailto:ahmedmujtabamp4@gmail.com)
 
 ---
 
