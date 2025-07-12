@@ -40,17 +40,18 @@ We estimate the size, evolution, and structure of India’s shadow economy over 
 
 ## 📁 File Structure
 
+```
 shadow-economy-india/
-├── data/                   # Raw + processed macroeconomic datasets ([Book1.xlsx](https://github.com/ahmedmujtaba24/Estimating-the-Shadow-Economy-in-India-A-MIMIC-Model-Approach/blob/main/Book1.xlsx))
-├── models/                # MIMIC model + ARIMA + regression scripts ([Model Scripts](https://github.com/ahmedmujtaba24/Estimating-the-Shadow-Economy-in-India-A-MIMIC-Model-Approach/blob/main/Model))
-├── missing_data/          # Interpolation + assumptions ([Missing Data File](https://github.com/ahmedmujtaba24/Estimating-the-Shadow-Economy-in-India-A-MIMIC-Model-Approach/blob/main/missing_data))
-├── notebooks/             # Jupyter analysis walkthroughs (to be uploaded)
-├── figures/               # PNGs of graphs, diagnostics, outputs ([Model Visuals](https://github.com/ahmedmujtaba24/Estimating-the-Shadow-Economy-in-India-A-MIMIC-Model-Approach/blob/main/model%20visuals))
-├── output/                # CSVs with shadow economy estimates + forecasts
-├── README.md              # This file ([Link](https://github.com/ahmedmujtaba24/Estimating-the-Shadow-Economy-in-India-A-MIMIC-Model-Approach))
-├── requirements.txt       # Python dependencies
-└── LICENSE                # Open license (MIT) ([License File](https://github.com/ahmedmujtaba24/Estimating-the-Shadow-Economy-in-India-A-MIMIC-Model-Approach/blob/main/Liscence))
-
+├── data/                   # Raw + processed macroeconomic datasets  
+├── models/                # MIMIC model + ARIMA + regression scripts  
+├── missing_data/          # Interpolation + assumptions  
+├── notebooks/             # Jupyter analysis walkthroughs  
+├── figures/               # PNGs of graphs, diagnostics, outputs  
+├── output/                # CSVs with shadow economy estimates + forecasts  
+├── README.md              # Project summary and documentation  
+├── requirements.txt       # Python dependencies  
+└── LICENSE                # Open license (MIT)
+```
 
 ---
 
