@@ -45,7 +45,6 @@ shadow-economy-india/
 ├── data/                   # Raw + processed macroeconomic datasets  
 ├── models/                # MIMIC model + ARIMA + regression scripts  
 ├── missing_data/          # Interpolation + assumptions  
-├── notebooks/             # Jupyter analysis walkthroughs  
 ├── figures/               # PNGs of graphs, diagnostics, outputs  
 ├── output/                # CSVs with shadow economy estimates + forecasts  
 ├── README.md              # Project summary and documentation  
