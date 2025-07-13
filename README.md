@@ -33,7 +33,7 @@ We estimate the size, evolution, and structure of India’s shadow economy over 
 
 ## 🧰 Tools & Libraries
 - Python (pandas, statsmodels, numpy, matplotlib, seaborn)
-- Jupyter Notebook (.ipynb)
+- VS Code (for running and organizing Python `.py` scripts)
 - Excel (for data cleaning & preprocessing)
 
 ---
