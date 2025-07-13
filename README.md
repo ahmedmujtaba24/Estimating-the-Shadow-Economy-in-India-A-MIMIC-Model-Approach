@@ -53,6 +53,15 @@ shadow-economy-india/
 └── LICENSE                # Open license (MIT)
 ```
 
+📂 **Quick Access Links:**
+
+- [`data/Book1.xlsx`](https://github.com/ahmedmujtaba24/Estimating-the-Shadow-Economy-in-India-A-MIMIC-Model-Approach/blob/main/Book1.xlsx)  
+- [`models/`](https://github.com/ahmedmujtaba24/Estimating-the-Shadow-Economy-in-India-A-MIMIC-Model-Approach/blob/main/Model)  
+- [`missing_data/`](https://github.com/ahmedmujtaba24/Estimating-the-Shadow-Economy-in-India-A-MIMIC-Model-Approach/blob/main/missing_data)  
+- [`figures/`](https://github.com/ahmedmujtaba24/Estimating-the-Shadow-Economy-in-India-A-MIMIC-Model-Approach/blob/main/model%20visuals)  
+- [`README.md`](https://github.com/ahmedmujtaba24/Estimating-the-Shadow-Economy-in-India-A-MIMIC-Model-Approach)  
+- [`LICENSE`](https://github.com/ahmedmujtaba24/Estimating-the-Shadow-Economy-in-India-A-MIMIC-Model-Approach/blob/main/Liscence)
+
 ---
 
 ## 📌 Use Cases
