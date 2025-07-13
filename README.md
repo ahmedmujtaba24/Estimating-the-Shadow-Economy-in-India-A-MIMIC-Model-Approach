@@ -36,6 +36,8 @@ We estimate the size, evolution, and structure of India’s shadow economy over 
 - VS Code (for running and organizing Python `.py` scripts)
 - Excel (for data cleaning & preprocessing)
 
+> **Note**: Additional variables such as CPI gap, financial inclusion measures, and crime statistics were explored but not included in the final model to avoid multicollinearity, overfitting, and identification issues inherent in MIMIC modeling.
+
 ---
 
 ## 📁 File Structure
